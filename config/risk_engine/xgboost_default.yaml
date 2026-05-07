@@ -1,0 +1,15 @@
+model:
+  name: xgboost
+  params:
+    n_estimators: 100
+    max_depth: 4
+    learning_rate: 0.1
+    subsample: 0.9
+    colsample_bytree: 0.9
+    reg_lambda: 1.0
+    random_state: 42
+
+training:
+  early_stopping_rounds: 20
+  eval_metric: auc
+

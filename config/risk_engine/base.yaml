@@ -1,0 +1,48 @@
+seed: 42
+
+paths:
+  raw_csv: data/raw/risk/The_Cancer_data_1500.csv
+  processed_dir: data/processed/risk_engine
+  artifacts_dir: experiments/risk_engine
+  model_dir: models/risk_engine
+
+split:
+  train: 0.80
+  val: 0.10
+  test: 0.10
+  stratify: true
+
+# Column mapping: edit these to match your Kaggle CSV.
+columns:
+  age: Age
+  bmi: BMI
+  gender: Gender
+  smoking: Smoking
+  alcohol: AlcoholIntake
+
+feature_engineering:
+  create_gerd: true
+  gerd_column: GERD
+  obesity_bmi_threshold: 30.0
+
+  # Simple probabilistic GERD injection based on BMI & smoking.
+  # probability = clamp(base + bmi_weight*(bmi-25) + smoking_bonus, 0, 0.95)
+  gerd_injection:
+    base: 0.10
+    bmi_weight: 0.02
+    smoking_bonus: 0.15
+
+  # Risk score as in your report:
+  # GERD (+3), Smoking (+2), Obesity (+1); high risk if score > 4.
+  risk_scoring:
+    gerd_weight: 3
+    smoking_weight: 2
+    obesity_weight: 1
+    high_risk_threshold: 4
+    target_column: Esophageal_Risk
+
+preprocess:
+  drop_na: true
+  one_hot_encode: true
+  scale_numeric: true
+

@@ -1,0 +1,9 @@
+train: C:/Users/sj428/Desktop/main-project-btp/data/processed/segmentation/yolo_exp1_augmented/images/train
+val: C:/Users/sj428/Desktop/main-project-btp/data/processed/segmentation/yolo_exp1_base/images/val
+nc: 5
+names:
+- Neoplastic
+- Inflammatory
+- Connective
+- Dead
+- Epithelial
